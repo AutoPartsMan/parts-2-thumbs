@@ -1,6 +1,10 @@
 <?php
+//turn on error reporting
 error_reporting(E_ALL);
+
+//sets default time zone (this is irrelevant to the operation of this script)
 date_default_timezone_set('America/New_York');
+
 echo '<html>
 <head>
 <title>AutoPartsMan | parts-2-thumbs</title>
@@ -20,12 +24,12 @@ $mi_max_size = 400;
 $si_max_size = 150;
 
 
-
 //opening this file in your browser will execute the php scripting inside this file
 //looks for a directory (folder) named "images" in the same directory level as this file
 //scans the "images" folder for jpg images
 //creates 3 subfolders in the "images" folder named "large", "medium", and "small"
-//copies each image and resizes them to the max sizes that you specify above and places in corresponding folder with the same file name as original (large, medium, small)
+//copies each image and resizes them to the max sizes that you specify above.
+//creates corresponding folders with the same file names as original image (large, medium, small)
 //does not affect original images
 
 
