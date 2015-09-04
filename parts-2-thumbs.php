@@ -47,13 +47,11 @@ foreach($myfilese as $mfe)
 		//process JPG
 		if(substr($mfe,-3) == 'JPG' || substr($mfe,-3) == 'jpg')
 		{
-			if(substr($mfe,-3) == 'JPG' || substr($mfe,-3) == 'jpg')
-			{
-				$image = imagecreatefromjpeg($folder_name . '/' . $ifilename);
-			}
-
+			$image = imagecreatefromjpeg($folder_name . '/' . $ifilename);
 			list($width_orig, $height_orig) = getimagesize($folder_name . '/' . $ifilename);
 
+			//create large sized copies
+			
 			$width = $li_max_size;
 			$height = $li_max_size;
 			
@@ -71,7 +69,6 @@ foreach($myfilese as $mfe)
 			
 			imagecopyresampled($image_p, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
 
-
 			if(!file_exists($folder_name . '/large/'))
 			{
 				$structure = $folder_name . '/large/';
@@ -82,10 +79,9 @@ foreach($myfilese as $mfe)
 				}
 			}
 
-			if(substr($mfe,-3) == 'JPG' || substr($mfe,-3) == 'jpg')
-			{
-				imagejpeg($image_p, $folder_name . '/large/' . $ifilename, 90);
-			}
+			imagejpeg($image_p, $folder_name . '/large/' . $ifilename, 90);
+			
+			//create medium sized copies
 
 			$width = $mi_max_size;
 			$height = $mi_max_size;
@@ -113,11 +109,10 @@ foreach($myfilese as $mfe)
 				}
 			}
 
-			if(substr($mfe,-3) == 'JPG' || substr($mfe,-3) == 'jpg')
-			{
-				imagejpeg($image_p, $folder_name . '/medium/' . $ifilename, 90);
-			}
+			imagejpeg($image_p, $folder_name . '/medium/' . $ifilename, 90);
 
+			//create small sized copies
+			
 			$width = $si_max_size;
 			$height = $si_max_size;
 
@@ -144,19 +139,20 @@ foreach($myfilese as $mfe)
 				}
 			}
 
-			if(substr($mfe,-3) == 'JPG' || substr($mfe,-3) == 'jpg')
-			{
-				imagejpeg($image_p, $folder_name . '/small/' . $ifilename, 90);
-			}
+			imagejpeg($image_p, $folder_name . '/small/' . $ifilename, 90);
 
+			//cleanup
 			imagedestroy($image_p);
 			imagedestroy($image);
 			
+			//increment counter
 			$fp++;
-		}
+			
+		}//end if
 
-	}
-}
+	}//end if
+	
+}//end foreach
 
 
 echo '<br>It appears that you have processed ' . $fp . ' images from the folder &quot;' . $folder_name . '&quot;<br> ';
